@@ -62,7 +62,13 @@ static struct track_info *cmus_next_file;
 
 int cmus_init(void)
 {
+	//Get if 'GoogleDrive' file with the public folder URL exists with read access
 	playable_exts = ip_get_supported_extensions();
+	if( access( "./GoogleDrive", R_OK ) != -1 ) {
+		info_msg("Starting Google Drive support...")
+		
+		
+	} 
 	cache_init();
 	job_init();
 	play_queue_init();
@@ -101,6 +107,7 @@ void cmus_play_file(const char *filename)
 {
 	struct track_info *ti;
 
+	
 	cache_lock();
 	ti = cache_get_ti(filename, 0);
 	cache_unlock();
